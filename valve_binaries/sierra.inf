@@ -1,0 +1,258 @@
+; The SIERRA.INF
+; This is a sample SIERRA.INF.  To build the INF for your project, start with 
+; this template and make the appropriate modifications.
+; This file must be on the root of the CD if the setup is compiled with _SIERRA defined.
+;
+; Created June 1997-  D'Andre Pritchett
+
+
+; The Ident Section contains identifying elements concerning the product.  This
+; Information is used within Setup and by Electronic Registration(EREG).
+; It is important the following items are present.
+
+[Ident]
+; ProductID is the identifying code used by EREG.  It can be any combination of 
+; alphanumeric characters.
+ProductID=70365
+
+; Version is the version of the application.  This is also used by EREG to identify
+; the product
+Version=1.0.0.5
+PatchVersion=1.1.0.7
+
+; ShortTitle is used internally to track Registry entries for EREG, AutoUpdate and 
+; other Sierra Utilities.  This should stay the same between versions of the same
+; product
+
+;If this is not HL, AutoUpdate will not function.
+ShortTitle=HALFLIFE
+
+Title=Half-Life
+
+; UpdateAfter is used for automatic product updating during the install process.
+; This allows a developer to tell autoupdate that after a certain date there may be
+; patches available, so as part of the installation process go ahead and check for them.
+; If this parameter is missing, then this feature is disables.  This feature requires
+; _SIERRA to be defined.  The format of the date is MM-DD-YYYY.
+UpdateAfter=9-1-1998
+
+; WebPage is used for the web page button.  You can specify the page to open when the 
+; product is selected as the target page.  SierraWeb is the default page if this is left
+; blank.
+WebPage=http://www.sierra.com
+
+; Readme is the name of the readme file to display under SierraUtilities.  You will need
+; provide the path to the readme from you application install directory
+Readme=readme.txt 
+
+; StrippedDemo indicates whether the product is a stripped down demo.  If it is, the
+; installation program will skip installation of Sierra Utilities, electronic registration,
+; installation of DirectX, and the sound tests.  The default is 0, indicating false.
+StrippedDemo=0
+
+; The demos section is how Sierra InstallShield supports dynamic demo selection.
+; To support demos, create a 'Demos' subdirectory off of the root directory (where Setup
+; is located).  In this subdirectory place each demo in its own uniquely named subdirectory.
+; Finally add an entry under the Demos section for each demo.
+
+
+PatchDate=10/15/98
+
+[System Test]
+; ScreenWidth is the X resolution of the required display
+ScreenWidth=640
+; ScreenHeight is the Y resolution of the required display
+ScreenHeight=480
+; Colors is the number of colors the display must be set for (minimum)
+Colors=65000
+; MemKB is the minimum amount of RAM physically present in KB
+; This should be adjusted for the possiblity of Shadow RAM or other RAM
+; being used by BIOS
+MemKB=23000
+; WinVer is the minimum version of Windows required
+; Possible values are:
+; 310 for Windows 3.1x
+; 395 for Windows 95
+; 400 for Windows NT
+WinVer=395
+; Wave is set to 1 if .WAV support is required
+Wave=1
+; MIDI is set to 1 if MIDI support is required
+MIDI=0
+; Processor is the minimum processor type and speed required for this 
+; application.  When setting this value, the format must be
+; processor-speed.  Setup is not intelligent enough to know that a
+; Pentium-60 is equivalent in speed to an 486-100.  Also setup is 
+; unable to make the distinction between processor requirement for
+; CPU functionality and for speed.
+; NOTE: Pentium-100's are not actually 100 MHz but 99 MHz.
+Processor=486-66
+
+[Setup]
+InstallShield=1
+
+
+[SierraUp]
+//--------------------------------------------------------------------
+// SierraUp.cfg: Configuration file for directing SierraUp to Update
+// specific applications.
+//
+//--------------------------------------------------------------------
+
+SierraUpInstalled=1
+
+ProductName "Half-Life"
+DisplayName "Half-Life"
+PatchFolder ".\update"       // Do not include trailing backslash.
+CurrentVersion "1.1.0.7"
+DirectoryServer "half-life.west.won.net:6003"
+DirectoryServer "half-life.east.won.net:6003"
+DirectoryServer "half-life.central.won.net:6003"
+
+//--------------------------------------------------------------------
+// Recommended fields.
+//
+// PatchTypes ... SierraUp supports client-side patch-list filtering.  
+//                This allows us to restict patches to certain users.
+//                Please set this to "opt" if you wish to support 
+//                optional patches (we strong recommend it).
+//--------------------------------------------------------------------
+PatchTypes "opt"
+
+//--------------------------------------------------------------------
+// Internationalization support.
+//
+// These files are included with SierraUp.
+//
+// Do not use this field for English.
+//--------------------------------------------------------------------
+//LanguageDllFile "SuFR.dll" // French
+//LanguageDllFile "SuDE.dll" // German
+//LanguageDllFile "SuIT.dll" // Italian
+//LanguageDllFile "SuES.dll" // Spanish
+
+//--------------------------------------------------------------------
+// Custom UI.
+//
+// If you have a custom resource dll to re-skin the UI, specify and
+// enable it here. 
+//
+// Use the PatchDescriptionExe setting to replace the default 
+// executable used to display update descriptions. Notepad is the 
+// default.
+//--------------------------------------------------------------------
+ResourceDllFile "sierraupres.dll"
+//PatchDescriptionExe "notepad.exe"
+
+//--------------------------------------------------------------------
+// To support internationalization (or custom flavors), set and enable 
+// this option.  Leave it disabled for the default english version.
+//--------------------------------------------------------------------
+//ExtraConfig "French"
+
+//--------------------------------------------------------------------
+// Timeouts.
+//
+// SierraUp will wait up to two minutes for some interal socket 
+// communications.  You can over-ride the defaults by setting these 
+// paramaters (time is in milliseconds):
+//   MotdTimeout ............... How long to wait for the message of 
+//                               the day.
+//   VersionTimeout ............ How long to wait for the current 
+//                               version.
+//   PatchTimeout .............. How long to wait for patch 
+//                               information.
+//   PatchDescriptionTimeout ... How long to wait for patch 
+//                               description files to download.
+// Generally speaking, we suggest you use the two minute default. 
+// You should never set these values under 30 seconds (30000 ms).
+//--------------------------------------------------------------------
+//MotdTimeout 30000
+//VersionTimeout 60000
+//PatchTimeout 60000
+//PatchDescriptionTimeout 45000
+
+//--------------------------------------------------------------------
+// To enable the Help buttons on certain dialogs, enable these 
+// options:
+//
+// WelcomeDlgHelpFile ......... Help file to display if the user 
+//                              presses the Help button on the 
+//                              Welcome (main) dialog.
+// OptionalPatchDlgHelpFile ... Help file to display if the user 
+//                              presses the Help button on the 
+//                              Optional Patch dialog.
+// SelectDlgHelpFile .......... Help file to display if the user 
+//                              presses the Help button on the Select 
+//                              Host dialog.
+// ProxyDlgHelpFile ........... Help file to display if the user 
+//                              presses the Help button on the Proxy 
+//                              dialog.
+// DownloadDlgHelpFile ........ Help file to display if the user 
+//                              presses the Help button on the 
+//                              Download dialog.
+// VisitHostDlgHelpFile ....... Help file to display if the user 
+//                              presses the Help button on the Visit 
+//                              Host dialog.
+// HelpExe .................... Use this setting to specify the 
+//                              executable used to display the Help 
+//                              files.  Notepad is the default.
+//--------------------------------------------------------------------
+//WelcomeDlgHelpFile "your help file"
+//OptionalPatchDlgHelpFile "your help file"
+//SelectDlgHelpFile "your help file"
+//ProxyDlgHelpFile "your help file"
+//DownloadDlgHelpFile "your help file"
+//VisitHostDlgHelpFile "your help file"
+//HelpExe "notepad.exe"
+
+//--------------------------------------------------------------------
+// Using SierraUp as a Launcher (this is not recommended).
+//
+// To use SierraUp as a Launcher set and enable the following options
+//   (as needed):
+// AutoStart ............. Tells SierraUp to automatically press the 
+//                         first "Continue" button.
+// MonitorPatch .......... Tells SierraUp to wait for the update to
+//                         "complete" (not to shut down first).
+// PatchSucceededValue ... If the MonitorPatch option is set, this
+//                         value is used to determine if the patch
+//                         succeeded.
+// LaunchExe ............. Executable to launch if the applicaton is
+//                         up to date.
+// LaunchParams .......... Parameters to pass directly to the launched
+//                         excutable (LaunchExe).  If specified as a
+//                         parameter to SierraUp and in the 
+//                         SierraUp.cfg (this file), both are passed
+//                         to the launched executable.
+// VersionExe ............ When monitoring patches, this is the 
+//                         executable (or DLL) to extract the version 
+//                         from after the patch has suceeded.  It is
+//                         used to dsetermine if another patch is 
+//                         needed.
+//--------------------------------------------------------------------
+//AutoStart
+//MonitorPatch
+//PatchSucceededValue 0 // Whatever value returned that means success.
+//LaunchExe "YourApplication.exe"
+//LaunchParams "Your parameter list"
+//VersionExe "YourApplication.exe"
+
+//--------------------------------------------------------------------
+// If you wish to do some simple patch validation, you can include 
+// this line.  If enabled, this file is checked against the current 
+// version and will force a re-application of an older patch.  This
+// is used to help catch the case where a user aborts the 
+// application of a patch part way through the process.
+//
+// Expected contents of the named file:
+//   [VersionInfo]
+//   CurrentVersion=1.2.0.3 (or whatever the appropriate version is).
+//--------------------------------------------------------------------
+//ValidateVersionFile ".\CurVer.ini"
+
+//--------------------------------------------------------------------
+// If you wish to enable debug logging, enable this option.  Logging
+// information will be written to C:\SierraUpdate.log.
+//--------------------------------------------------------------------
+//Debug
